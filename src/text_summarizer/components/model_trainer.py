@@ -1,3 +1,4 @@
+import os 
 from transformers import TrainingArguments,Trainer
 from transformers import DataCollatorForSeq2Seq
 from transformers import AutoModelForSeq2SeqLM,AutoTokenizer
@@ -28,7 +29,6 @@ class ModelTrainer:
         dataset_samsum_pt = dataset_samsum_pt.map(lambda example: {key: example[key][:10] for key in example})
 
         # Set the output directory to the desired path
-        output_dir = "D:\\projectFiles\\text_summarization_project\\model_data"
 
         trainer_args = TrainingArguments(
             output_dir=self.config.root_dir,
@@ -55,8 +55,8 @@ class ModelTrainer:
         trainer.train()
 
         # Save model to the specified directory
-        model_pegasus.save_pretrained(output_dir)
+        model_pegasus.save_pretrained(os.path.join(self.config.root_dir, "pegasus-samsum-model"))
         # Save tokenizer to the specified directory
-        tokenizer.save_pretrained(output_dir)
+        tokenizer.save_pretrained(os.path.join(self.config.root_dir, "tokenizer"))
 
 

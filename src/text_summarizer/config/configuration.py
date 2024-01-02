@@ -106,5 +106,8 @@ class ConfigurationManager:
         )
 
         return model_trainer_config
+    
+
+
 
 
